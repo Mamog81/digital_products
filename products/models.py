@@ -3,10 +3,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
-    parrent = models.ForeignKey('self', verbose_name=_("parrent"), on_delete=models.CASCADE , blank=True , null=True)
+    parent= models.ForeignKey('self', verbose_name=_("parent"), on_delete=models.CASCADE , blank=True , null=True)
     title = models.CharField(_("title"), max_length=50)
     description = models.TextField(_("description") , blank=True ) 
-    avatar = models.ImageField(_("avatar"), upload_to='categories')
+    avatar = models.ImageField(_("avatar"), upload_to='categories' , blank=True , null=True)
     is_enable = models.BooleanField(_("is enable") , default=True  )
     created_time = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_time = models.DateTimeField(_("updated at"), auto_now=True)
@@ -16,11 +16,14 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         
+    def __str__(self):
+        return self.title
+
     
 class Product(models.Model):
     title = models.CharField(_("title"), max_length=50)
     description = models.TextField(_("description") , blank=True ) 
-    avatar = models.ImageField(_("avatar"), upload_to='categories')
+    avatar = models.ImageField(_("avatar"), upload_to='products')
     is_enable = models.BooleanField(_("is enable") , default=True  )
     categories = models.ManyToManyField("Category", verbose_name=_("categories") , blank=True)
     created_time = models.DateTimeField(_("created at"), auto_now_add=True)
@@ -30,8 +33,10 @@ class Product(models.Model):
         db_table = 'products'
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
-        
-    
+
+    def __str__(self):
+        return self.title
+
 
 
 
@@ -39,7 +44,7 @@ class Product(models.Model):
 class File(models.Model):
     product = models.ForeignKey("Product", verbose_name=_("product"), on_delete=models.CASCADE)
     title = models.CharField(_("title"), max_length=50)
-    models.FileField(_("file"), upload_to='files/%Y/%m/%d/')
+    file = models.FileField(_("file"), upload_to='files/%Y/%m/%d/', blank=True , null=True)
     is_enable = models.BooleanField(_("is enable") , default=True  )
     created_time = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_time = models.DateTimeField(_("updated at"), auto_now=True)
@@ -49,5 +54,8 @@ class File(models.Model):
         db_table = 'files'
         verbose_name = 'File'
         verbose_name_plural = 'Files'
+    def __str__(self):
+        return self.title
+
         
     
