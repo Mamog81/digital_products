@@ -1,0 +1,35 @@
+# Python-related
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+*.env/
+
+# Django-specific
+db.sqlite3
+*.log
+
+# Local IDE settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Python distribution
+.eggs/
+dist/
+build/
+*.egg-info/
+
+# Miscellaneous
+*.swp
+*~
+*.bak
