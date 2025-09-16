@@ -8,6 +8,8 @@ __pycache__/
 venv/
 env/
 *.env/
+# Ignore the .env file
+.env
 
 # Django-specific
 db.sqlite3
@@ -33,3 +35,8 @@ build/
 *.swp
 *~
 *.bak
+
+
+
+# Ignore media folder
+media/
